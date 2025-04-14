@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    
+    <head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Password Manager</title> 
+    <link rel="stylesheet" type="text/css" href="newFrontendStyle.css" /> 
+    <style> 
+
+h1 { 
+    margin: 5px 0; /* Reduce margin for h1 elements */ 
+} 
+ 
+        button { 
+            padding: 10px 20px; 
+            margin-top: 10px; 
+            cursor: pointer; 
+            background-color: #100604; 
+            color: #ffffff; 
+            border: none; 
+            border-radius: 4px; 
+        } 
+ 
+        button:hover { 
+            background-color: #333; 
+        } 
+      
+ 
+        .credential-buttons button { 
+            padding: 5px; 
+            font-size: 12px; 
+            margin: 5px 5px 0 0; 
+        } 
+ 
+        .hidden-password { 
+            display: inline-block; 
+            width: 100px; /* Adjust width as needed */ 
+            overflow: hidden; 
+            white-space: nowrap; 
+            text-overflow: ellipsis; 
+        } 
+ 
+        .hidden-password:hover { 
+            overflow: visible; 
+            white-space: normal; 
+        } 
+    </style> 
+</head> 
+<body> 
+    <div class="menu"> 
+        <button onclick="toggleMenu()">☰</button> 
+        <div class="menu-content" id="menuContent"> 
+            <a href="#">About</a> 
+            <a href="#">Settings</a> 
+            <a href="#" onclick="window.location.href='signIn.html'">Delete</a> 
+        </div> 
+    </div> 
+    <div class="container"> 
+        <img src="pixelcut-export.png" /> 
+        <h1>Accountex:</h1> 
+        <h1>Password Manager</h1> 
+        <div id="login-container"> 
+            <label for="login-password">Enter Password:</label> 
+            <input type="password" id="login-password" required> 
+            <button  onclick="login()">Login</button> 
+            <button onclick="window.location.href='forgotPassword.html'">Forgot Password</button> 
+        </div> 
+    </div> 
+    <script> 
+        function login() { 
+            // Redirect to list.html after login 
+            window.location.href = 'list.html'; 
+        } 
+ 
+        function toggleMenu() { 
+            const menu = document.getElementById("menuContent"); 
+            menu.style.display = menu.style.display === "block" ? "none" : "block"; 
+        } 
+    </script> 
+</body> 
+</html> 
