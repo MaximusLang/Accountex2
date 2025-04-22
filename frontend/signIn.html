@@ -5,46 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <title>Sign Up Form | By Code Info</title> 
   <link rel="stylesheet" type="text/css" href="newFrontendStyle.css" /> 
-  <style> 
-    .red-button { 
-      background-color: red; 
-      color: white; 
-      border: none; 
-      padding: 10px 20px; 
-      cursor: pointer; 
-      font-size: 16px; 
-    } 
-    
-    .red-button:hover { 
-      background-color: rgb(131, 32, 32); 
-    } 
-  </style> 
 </head> 
 <body> 
   <div class="container"> 
     <img src="pixelcut-export.png" /> 
     <h2>Member Sign Up</h2> 
     <form onsubmit="saveCredentials(event)"> 
-      <input type="text" id="signup-username" placeholder="Username" required /> 
       <input type="password" id="signup-password" placeholder="Password" required /> 
       <input type="password" placeholder="Confirm Password" required /> 
-      <button type="submit">Sign Up</button> 
+      <button type="submit" >Sign Up</button> 
     </form> 
     <br /> 
-    <a href="PM.html">Already have an account? Log in</a> 
+    <button onclick="check()">Already have an account? Log in</button> 
   </div> 
  
   <script> 
     function saveCredentials(event) { 
       event.preventDefault(); // Prevent form submission 
-      const username = document.getElementById("signup-username").value; 
       const password = document.getElementById("signup-password").value; 
  
-      localStorage.setItem("username", username); 
       localStorage.setItem("password", password); 
  
       window.location.href = "PM.html"; // Redirect to login page 
-    } 
+    }
+
+
+    //verifies if the user has signed up or not
+    function check() {
+      if (localStorage.getItem("password") === null) {
+        alert("Please sign up first.");
+        window.location.href = "signIn.html";
+      } 
+        window.location.href = "PM.html";
+    }
   </script> 
 </body>
 </html> 
