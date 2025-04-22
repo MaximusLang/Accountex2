@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Settings</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #959595;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .color-picker {
+            margin-left: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #100604;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Theme Settings</h2>
+        <div id="accountList">
+            <!-- Dynamic account items will be added here -->
+        </div>
+        <button onclick="saveThemes()">Save Changes</button>
+    </div>
+
+    <script>
+        // Load accounts from localStorage
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        const themes = JSON.parse(localStorage.getItem('themes')) || {};
+
+        // Get the account list container
+        const accountList = document.getElementById('accountList');
+
+        // Display each account with a color picker
+        function displayAccounts() {
+            accountList.innerHTML = ''; // Clear existing accounts
+            accounts.forEach((account, index) => {
+                const accountItem = document.createElement('div');
+                accountItem.className = 'account-item';
+
+                const accountText = document.createElement('span');
+                accountText.textContent = account.account;
+
+                const colorPicker = document.createElement('input');
+                colorPicker.type = 'color';
+                colorPicker.className = 'color-picker';
+                colorPicker.value = themes[account.account] || '#e0e0e0'; // Default color
+                colorPicker.oninput = (e) => {
+                    themes[account.account] = e.target.value; // Update theme for the account
+                };
+
+                accountItem.appendChild(accountText);
+                accountItem.appendChild(colorPicker);
+                accountList.appendChild(accountItem);
+            });
+        }
+
+        // Save themes to localStorage
+        function saveThemes() {
+            localStorage.setItem('themes', JSON.stringify(themes));
+            alert('Themes saved successfully!');
+            window.location.href = 'list.html'; // Redirect back to list.html
+        }
+
+        // Initial display of accounts
+        displayAccounts();
+    </script>
+</body>
+</html>
