@@ -24,7 +24,7 @@
         </div>
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search">
-            <button onclick="sortAccounts()">Sort</button>
+            <button onclick="filter()">Search</button>
         </div>
         <p>Click account to view password</p>
         <div class="add-account">
@@ -85,13 +85,21 @@
                 displayAccounts();
             }
         }
-        function sortAccounts() {
-            accounts.sort((a, b) => a.account.localeCompare(b.account));
-            localStorage.setItem('accounts', JSON.stringify(accounts));
-            displayAccounts();
-        }
         function logout() {
             window.location.href = 'PM.html';
+        }
+        function filter() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const items = accountList.getElementsByClassName('account-item');
+
+            for (let i = 0; i < items.length; i++) {
+                const accountText = items[i].getElementsByTagName('span')[0];
+                if (accountText.innerHTML.toLowerCase().includes(input)) {
+                    items[i].style.display = '';
+                } else {
+                    items[i].style.display = 'none';
+                }
+            }
         }
         displayAccounts();
     </script>

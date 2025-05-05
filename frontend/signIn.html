@@ -5,12 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   <title>Sign Up Form | By Code Info</title> 
   <link rel="stylesheet" type="text/css" href="newFrontendStyle.css" /> 
+  <script>
+    function checkForPassword() {
+      const password = localStorage.getItem("password");
+      if (password) {
+        window.location.href = "PM.html"; // Redirect to PM.html if password exists
+      }
+    }
+    checkForPassword();
+  </script>
 </head> 
 <body> 
   <div class="container"> 
     <img src="pixelcut-export.png" /> 
     <h2>Member Sign Up</h2> 
     <form onsubmit="saveCredentials(event)"> 
+      <input type="text" id="userEmail" placeholder="Email" required />
       <input type="password" id="signup-password" placeholder="Password" required /> 
       <input type="password" placeholder="Confirm Password" required /> 
       <button type="submit" >Sign Up</button> 
@@ -22,9 +32,13 @@
   <script> 
     function saveCredentials(event) { 
       event.preventDefault(); // Prevent form submission 
-      const password = document.getElementById("signup-password").value; 
+      const password = document.getElementById("signup-password").value;
+      const email = document.getElementById("userEmail").value; 
  
       localStorage.setItem("password", password); 
+      localStorage.setItem("email", email);
+      alert("Account created successfully!");
+      
  
       window.location.href = "PM.html"; // Redirect to login page 
     }

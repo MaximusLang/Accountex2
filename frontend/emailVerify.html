@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Verification</title>
+    <link rel="stylesheet" type="text/css" href="newFrontendStyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <img src="pixelcut-export.png" />
+        <h2>Accountex</h2>
+        <h1>Email Verification</h1>
+        <form>
+            <button type="button" onclick="verifyEmail()">Click to Send email</button>
+            <input placeholder="Enter your verification code" type="text" id="verification_code" name="verification_code" required>
+            <button type="button" onclick="verifyEmailCode()">Verify</button>
+        </form>
+    </div>
+    <script>
+        // Function to send the verification email
+        function verifyEmail() {
+                // Initialize EmailJS
+                emailjs.init({
+                    publicKey: "PUBLIC_KEY",
+                });
+
+
+                // Generate a random verification code
+                const passcode = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
+
+                // Store the passcode in localStorage
+                localStorage.setItem('verification_code', passcode);
+
+                // Send the email
+                emailjs.send("USER_ID","TEMPLATE_ID",{
+                    passcode: localStorage.getItem('verification_code'),
+                    email: localStorage.getItem('email')
+                })
+                    .then(function(response) {
+                        alert('Verification email sent successfully! Please check your inbox.');
+                        console.log('SUCCESS!', response.status, response.text);
+                    }, function(error) {
+                        alert('Failed to send verification email. Please try again.');
+                        console.log('FAILED...', error);
+                    });
+ 
+        }
+
+        // Function to verify the email code
+        function verifyEmailCode() {
+            const enteredCode = document.getElementById('verification_code').value;
+            const storedCode = localStorage.getItem('verification_code'); // Retrieve the stored code
+
+            if (enteredCode === storedCode) {
+                alert('Email verified successfully!');
+                window.location.href = 'forgotPassword.html'; // Redirect to the next page
+            } else {
+                alert('Invalid verification code. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
