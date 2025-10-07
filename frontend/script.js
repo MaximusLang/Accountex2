@@ -2,17 +2,17 @@
 function check() {
     if (localStorage.getItem("password") === null) {
       alert("Please sign up first.");
-      window.location.href = "signIn.html";
+      window.location.href = "index.html";
     } else {
       window.location.href = "PM.html";
     }
   }
 
   function deleteAccount() {
-    // Clear local storage and redirect to signIn.html
+    // Clear local storage and redirect to index.html
     localStorage.clear();
     alert("Account deleted successfully.");
-    window.location.href = 'signIn.html';
+    window.location.href = 'index.html';
 }
 
 function resetPassword() {
